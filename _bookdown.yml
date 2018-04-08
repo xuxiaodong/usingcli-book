@@ -1,0 +1,7 @@
+book_filename: usingcli
+language:
+  label:
+    fig: "图 "
+    tab: "表 "
+  ui:
+    chapter_name: ["第 ", " 章"]

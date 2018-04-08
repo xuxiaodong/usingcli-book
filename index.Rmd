@@ -1,0 +1,23 @@
+--- 
+title: "像黑客一样使用命令行"
+author: "徐小东"
+date: "`r Sys.Date()`"
+colorlinks: yes
+description: 命令行的高级用法。
+documentclass: ctexbook
+geometry:
+  - b5paper
+  - tmargin=2.5cm
+  - bmargin=2.5cm
+  - lmargin=3.5cm
+  - rmargin=2.5cm
+link-citations: yes
+lof: yes
+lot: yes
+site: bookdown::bookdown_site
+biblio-style: apalike
+---
+
+# 前言 {-}
+
+## 致谢 {-}
