@@ -2,9 +2,11 @@ bookdown::gitbook:
   css: css/style.css
   config:
     toc:
-      collapse: none
+      collapse: subsection
       before: |
         <li><a href="./">像黑客一样使用命令行</a></li>
+  download: no
+  sharing: no
 bookdown::pdf_book:
   includes:
     in_header: latex/preamble.tex
