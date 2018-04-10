@@ -1,0 +1,63 @@
+# 命令行入门
+
+虽然如今计算机图形化界面大行其道，然而在计算机诞生之初却是命令行界面的天下。那么，什么是命令行界面呢？要说清这个问题，让我们先来谈谈 Console（控制台）、Terminal（终端）、Terminal emulator（终端模拟器）、Shell 等基本概念。
+
+## Console（控制台）
+
+Console 即控制台，又称为 System console（系统控制台）、Computer console（计算机控制台）、Root console（根控制台）、Operator's console（操作员控制台）。实际上，早先的控制台是一种用来操作计算机的硬件，如图 \@ref(fig:ibm-1620-model-1) 所示。^[该图引自 [Wikipedia](https://en.wikipedia.org/wiki/System_console#/media/File:IBM_1620_Model_1.jpg)]在该图中我们可以看到，IBM 1620 计算机的控制台由左边的操作前面板（参见图 \@ref(fig:ibm-1620-model-1-front-panel)）和右边的打字机组成。通过控制台，操作员完成将文本或指令录入到计算机的工作，最终并回显出结果。
+
+```{r ibm-1620-model-1, echo=FALSE, fig.cap='IBM 1620 的控制台'}
+knitr::include_graphics('images/ibm_1620_model_1.jpg')
+```
+
+```{r ibm-1620-model-1-front-panel, echo=FALSE, fig.cap='IBM 1620 的操作前面板'}
+knitr::include_graphics('images/ibm_1620_model_1_front_panel.jpg')
+```
+
+随着计算机的发展，控制台从硬件概念变成了一个软件概念。所以控制台也有了新的称法：虚拟控制台，正好与实打实的控制台硬件相对。当 Linux 系统启动时，经过计算机硬件自检画面之后的过程就进入了系统控制台。在该过程中，通常会显示 Linux 系统引导的信息，如图 \@ref(fig:linux-booting) 所示。
+
+```{r linux-booting, echo=FALSE, fig.cap='Linux 系统控制台'}
+knitr::include_graphics('images/linux_booting.png')
+```
+
+```{block2, type='rmdtip'}
+在 Linux 桌面环境中要进入虚拟控制台，可以按 Ctrl + Alt + F1 ... F6 组合键。再次按下 Ctrl + Alt + F7 则又回到桌面。
+```
+
+## Terminal（终端）
+
+跟控制台一样，起初的 Terminal（终端）也是一种计算机硬件设备，类似我们今天看到的显示器和键盘的结合体。利用终端，用户将数据输入到计算机。同时，终端也将计算机中的数据展示给用户。图 \@ref(fig:dec-vt100) 为曾经广泛流行的终端 DEC VT100。^[该图引自 [Wikipedia](https://en.wikipedia.org/wiki/Computer_terminal#/media/File:DEC_VT100_terminal.jpg)]
+
+```{r dec-vt100, echo=FALSE, fig.cap='DEC VT100 终端'}
+knitr::include_graphics('images/dec_vt100.jpg')
+```
+
+为什么会出现终端这种设备？以今天的眼光看似乎显得不可理解。早期的计算机十分昂贵，可不像现在人人都能拥有一台。除了大型商业组织或大学，很难在别处看到计算机的身影。为了共享计算机资源，终端应运而生。伴随着科技的进步，终端虽然最终掉进了历史的黑洞，然而却以新的形式重生，这就是 Terminal emulator（终端模拟器），或称之为虚拟终端。
+
+## Terminal emulator（终端模拟器）
+
+Terminal emulator 意为终端模拟器，即用来模拟终端硬件设备的应用程序。某些显示体系结构，像是用来控制色彩的转义序列、光标位置等在终端模拟器中得到了支持。图 \@ref(fig:xterm) 显示 Linux 中流行的终端程序之一 xterm。
+
+```{r xterm, echo=FALSE, fig.cap='xterm 终端程序'}
+knitr::include_graphics('images/xterm.png')
+```
+
+不管是 Linux，还是 macOS，乃至 Windows 操作系统平台，都有许多终端模拟器选择。
+
+### Linux
+
+- xterm：X11 环境的默认终端。
+- gnome-terminal：GNOME 桌面环境的默认终端。
+- konsole：KDE 桌面环境的默认终端。
+- xfce4-terminal：Xfce 桌面环境的默认终端。
+- rxvt-unicode：克隆自 rxvt，但加入了 unicode 支持，具有很强的定制特性。本书作者使用的就是这款终端。
+
+### macOS
+
+- Terminal：macOS 操作系统默认的终端。
+- iTerm2：非常流行的开源终端。
+
+### Windows
+
+- mintty：Cygwin 环境的终端。
+- PuTTY：支持多种协议的开源终端。
