@@ -3,3 +3,10 @@
 .RData
 .Ruserdata
 _book
+usingcli.f*
+usingcli.i*
+usingcli.l*
+usingcli.aux
+usingcli.out
+usingcli.toc
+latex/__latex*
