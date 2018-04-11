@@ -76,7 +76,7 @@ knitr::include_graphics('images/shell.jpg')
 
 在 Unix 及 Linux 的发展过程中，出现了多种 Shell，其中比较知名的包括：sh、csh、ksh、bash、zsh 等。
 
-### sh
+### sh {#sh}
 
 sh，即 Bourne shell，为 Unix 第 7 版的默认 Shell。Bourne shell 由贝尔实验室的 Stephen Bourne 开发，于 1979 年发布。随着《Unix 编程环境》（Brian Kernighan 与 Rob Pike 著）一书的出版，sh 变得大为流行。
 
@@ -87,6 +87,13 @@ root@toydroid:~# ls -l /bin/sh
 lrwxrwxrwx 1 root root 4 Jan 24  2017 /bin/sh -> dash
 ```
 
+在作者的另一个系统 Arch Linux 中，sh 为 bash。
+
+```bash
+root@codeland:~# ls -l /bin/sh
+lrwxrwxrwx 1 root root 4 Feb  7 15:15 /bin/sh -> bash*
+```
+
 ### csh
 
 csh 是 C shell 的简称，它由 Bill Joy 开发，通过 BSD 得到了广泛的分发。在风格上，开发者将 csh 设计得像 C 编程语言一样，因而由此得名。同时，使它具有更佳的交互使用体验。后来被其它 Shell 吸收的诸如历史、别名、目录栈、文件名补全、作业控制等特性均出自 csh。
@@ -95,4 +102,12 @@ csh 有一个改进版本叫 tcsh，目前是 FreeBSD 的默认 Shell。
 
 ### ksh
 
-ksh 指 KornShell，其开发者为 David Korn，在 1983 年公布于世。ksh 遵循 POSIX 标准，能够向下兼容 Bourne shell，整合了来自 C shell 的诸多特性。ksh 的一大亮点是引入了 vi 和 Emacs 风格的命令行编辑模式，用户完全可以按照自己的按键习惯操作。
+ksh 指 KornShell，其开发者为 David Korn，在 1983 年公布于世。ksh 遵循 POSIX 标准，能够向下兼容 Bourne shell，整合了来自 C shell 的诸多特性。ksh 的一大亮点是引入了 vi 和 Emacs 风格的命令行编辑模式，使用户完全可以按照自己的按键习惯操作。此外，在 ksh 中还增加了关联数组的特性。
+
+由于 ksh 最初以私有软件的形式进行分发，从而被限制了传播。代之以出现的替代品包括 pdksh（public domain ksh，公有域的 ksh）、mksh（后成为 Android 的默认 Shell）等。
+
+### bash
+
+bash 作为理查德·斯托曼 GNU 工程的一部分出现，从它诞生之初就是为了用来取代 Bourne shell（参考 \@ref(sh)）。Brian Fox 开发了 bash，首个版本发布于 1989 年。如今，bash 已变得十分流行，它是大多数 Linux 发行版以及 macOS 的默认 Shell。此外，通过 WSL（Windows Subsystem for Linux），在 Windows 10 中也可以安装并使用 bash。
+
+bash 的名称来自于 **B**ourne-**a**gain **sh**ell，它也遵循 POSIX 标准，其特性吸收自 sh、csh、ksh 等多种 Shell。
