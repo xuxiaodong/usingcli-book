@@ -42,7 +42,7 @@ Terminal emulator 意为终端模拟器，即用来模拟终端硬件设备的�
 knitr::include_graphics('images/xterm.png')
 ```
 
-不管是 Linux，还是 macOS，乃至 Windows 操作系统平台，都有许多终端模拟器选择。
+不管是 Linux，还是 macOS，乃至 Windows 操作系统平台，都有许多终端模拟器可以选择。
 
 ### Linux
 
@@ -61,3 +61,38 @@ knitr::include_graphics('images/xterm.png')
 
 - mintty：Cygwin 环境的终端。
 - PuTTY：支持多种协议的开源终端。
+
+终端模拟器究竟有什么用呢？这就是我们将在下一节要介绍的内容——Shell。
+
+## Shell
+
+在 Linux 中，Shell 是一种命令解释程序，它负责用户输入命令的解析和执行。现代 Shell 除了具有与用户直接交互的特性之外，通常也包含编程功能，支持变量、数组、函数、循环、条件等要素。
+
+Shell 之所以被称为 Shell，是由于它相对 Linux 的核心——内核而言，处于最外层，就像乌龟的壳一样。也正因为如此，Shell 提供用来访问系统服务的用户界面，扮演着与内核交互的角色，如图 \@ref(fig:shell) 所示。
+
+```{r shell, echo=FALSE, fig.cap='Shell 与内核'}
+knitr::include_graphics('images/shell.jpg')
+```
+
+在 Unix 及 Linux 的发展过程中，出现了多种 Shell，其中比较知名的包括：sh、csh、ksh、bash、zsh 等。
+
+### sh
+
+sh，即 Bourne shell，为 Unix 第 7 版的默认 Shell。Bourne shell 由贝尔实验室的 Stephen Bourne 开发，于 1979 年发布。随着《Unix 编程环境》（Brian Kernighan 与 Rob Pike 著）一书的出版，sh 变得大为流行。
+
+现在 Linux 系统中的 sh 通常是符号链接的某个兼容 Shell。例如，作者所用的 Debian 9 里的 sh 为 dash。
+
+```bash
+root@toydroid:~# ls -l /bin/sh
+lrwxrwxrwx 1 root root 4 Jan 24  2017 /bin/sh -> dash
+```
+
+### csh
+
+csh 是 C shell 的简称，它由 Bill Joy 开发，通过 BSD 得到了广泛的分发。在风格上，开发者将 csh 设计得像 C 编程语言一样，因而由此得名。同时，使它具有更佳的交互使用体验。后来被其它 Shell 吸收的诸如历史、别名、目录栈、文件名补全、作业控制等特性均出自 csh。
+
+csh 有一个改进版本叫 tcsh，目前是 FreeBSD 的默认 Shell。
+
+### ksh
+
+ksh 指 KornShell，其开发者为 David Korn，在 1983 年公布于世。ksh 遵循 POSIX 标准，能够向下兼容 Bourne shell，整合了来自 C shell 的诸多特性。ksh 的一大亮点是引入了 vi 和 Emacs 风格的命令行编辑模式，用户完全可以按照自己的按键习惯操作。
