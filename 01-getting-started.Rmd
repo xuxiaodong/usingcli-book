@@ -164,7 +164,13 @@ xiaodong@codeland:~$ chsh -s /bin/zsh
 
 在《C 程序设计语言》中，作者 Brian W. Kernighan 和 Dennis M. Ritchie 介绍的第一个程序是在屏幕上输出一行“Hello world”的消息。为了说明命令行的使用，我们也将在屏幕上输出类似的消息——你好，命令行。
 
-当我们进入控制台或打开终端时，通常会看到跟图 \@ref(fig:cil-prompt) 相似的界面。从该图中我们可以看到命令行由下面几部分组成：
+当我们进入控制台或打开终端时，通常会看到跟图 \@ref(fig:cli-prompt) 相似的界面。
+
+```{r cli-prompt, echo=FALSE, fig.cap='命令行界面'}
+knitr::include_graphics('images/cli-hello.png')
+```
+
+从该图中我们可以看到命令行由下面几部分组成：
 
 1. 当前登录的用户名称。
 
