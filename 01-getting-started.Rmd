@@ -130,6 +130,26 @@ knitr::include_graphics('images/zsh_prompt.png')
 与 CLI 相对的是 GUI，即 Graphical user interface，意为图形用户界面，它采用图形化的方式让用户与计算机进行交互。因其具有容易使用的优点，包括 Linux、macOS、Windows 等在内的现代操作系统无一例外都提供了图形用户界面。
 ```
 
+既然图形用户界面要比命令行界面更加易用，那么是否说明可以完全抛弃命令行界面呢？答案是并非如此。事实上，有经验的用户尤其擅长使用命令行界面，其理由至少包括下面这几个方面。
+
+### 功能强大
+
+让我们来看一个例子：
+
+```bash
+% history |
+awk '{CMD[$2]++;count++;}END \
+{ for (a in CMD)print CMD[a] " " \
+CMD[a]/count*100 "% " a;}' |
+grep -v "./" |
+column -c3 -s " " -t |
+sort -nr |
+nl |
+head -n10
+```
+
+## 如何进入命令行
+
 通过前面的讨论现在我们可以知晓，我们想要输入命令的界面由 Shell 提供，而执行 Shell 则有两种方法。
 
 ### 通过控制台进入命令行
