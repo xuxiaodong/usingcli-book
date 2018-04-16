@@ -1,48 +1,44 @@
 # 命令行入门
 
-虽然如今计算机图形化界面大行其道，然而在计算机诞生之初却是命令行界面的天下。那么，什么是命令行界面呢？要说清这个问题，让我们先来谈谈 Console（控制台）、Terminal（终端）、Terminal emulator（终端模拟器）、Shell 等基本概念。
+虽然如今计算机图形化界面大行其道，然而在计算机诞生之初却是命令行界面的天下。在图形化界面中，我们惯常使用鼠标来操作图标或窗口，从而完成各种任务。对于命令行界面来说，情况则有很大的不同。要在命令行界面下执行操作，我们需要更多的依赖键盘。那么，什么是命令行界面呢？在回答这个问题之前，不妨让我们先来谈谈控制台、终端、终端模拟器、以及 Shell 这几个基本概念。
 
-## Console（控制台）
+## 控制台
 
-Console 即控制台，又称为 System console（系统控制台）、Computer console（计算机控制台）、Root console（根控制台）、Operator's console（操作员控制台）。实际上，早先的控制台是一种用来操作计算机的硬件，如图 \@ref(fig:ibm-1620-model-1) 所示。^[该图引自 [Wikipedia](https://en.wikipedia.org/wiki/System_console#/media/File:IBM_1620_Model_1.jpg)]在该图中我们可以看到，IBM 1620 计算机的控制台由左边的操作前面板（参见图 \@ref(fig:ibm-1620-model-1-front-panel)）和右边的打字机组成。通过控制台，操作员完成将文本或指令录入到计算机的工作，最终并回显出结果。
+控制台（Console），又称为系统控制台（System console）、计算机控制台（Computer console）、根控制台（Root console）、以及操作员控制台（Operator's console）。事实上，早先的控制台是一种用来操作计算机的硬件，如图 \@ref(fig:ibm-1620-model-1) 所示。^[引自 [Wikipedia](https://en.wikipedia.org/wiki/System_console#/media/File:IBM_1620_Model_1.jpg)]在这幅图片中我们可以看到，IBM 1620 计算机的控制台由左边的操作前面板（参考图 \@ref(fig:ibm-1620-model-1-front-panel)）和右边的打字机组成。通过控制台，操作员将文本数据或待执行的指令录入到计算机，并最终由计算机读取或执行。
 
 ```{r ibm-1620-model-1, echo=FALSE, fig.cap='IBM 1620 的控制台'}
 knitr::include_graphics('images/ibm_1620_model_1.jpg')
 ```
 
-```{r ibm-1620-model-1-front-panel, echo=FALSE, fig.cap='IBM 1620 的操作前面板'}
+```{r ibm-1620-model-1-front-panel, echo=FALSE, fig.cap='IBM 1620 控制台的操作前面板'}
 knitr::include_graphics('images/ibm_1620_model_1_front_panel.jpg')
 ```
 
-随着计算机的发展，控制台从硬件概念变成了一个软件概念。所以控制台也有了新的称法：虚拟控制台，正好与实打实的控制台硬件相对。当 Linux 系统启动时，经过计算机硬件自检画面之后的过程就进入了系统控制台。在该过程中，通常会显示 Linux 系统引导的信息，如图 \@ref(fig:linux-booting) 所示。
+随着计算机的发展，控制台从硬件概念变成了一个软件概念。于是，控制台有了新的称呼：虚拟控制台。虚拟控制台正好与实体的控制台硬件相对。通过观察 Linux 系统的启动过程，我们可以发现：在经过计算机硬件自检之后，一旦由引导载入程序接管，不一会儿便会进入系统控制台。在这个过程中，通常会显示如图 \@ref(fig:linux-booting) 所示的 Linux 系统引导信息。
 
 ```{r linux-booting, echo=FALSE, fig.cap='Linux 系统控制台'}
 knitr::include_graphics('images/linux_booting.png')
 ```
 
-```{block2, type='rmdtip'}
-在 Linux 桌面环境中要进入虚拟控制台，可以按 Ctrl + Alt + F1 ... F6 组合键。再次按下 Ctrl + Alt + F7 则又回到桌面。
-```
+## 终端
 
-## Terminal（终端）
-
-跟控制台一样，起初的 Terminal（终端）也是一种计算机硬件设备，类似我们今天看到的显示器和键盘的结合体。利用终端，用户将数据输入到计算机。同时，终端也将计算机中的数据展示给用户。图 \@ref(fig:dec-vt100) 为曾经广泛流行的终端 DEC VT100。^[该图引自 [Wikipedia](https://en.wikipedia.org/wiki/Computer_terminal#/media/File:DEC_VT100_terminal.jpg)]
+跟控制台一样，起初的终端（Terminal）也是一种计算机硬件设备。从外形上看，终端类似我们今天看到的显示器和键盘的结合体。利用终端，用户将数据输入到计算机。同时，终端也将计算机中的数据展示给用户。图 \@ref(fig:dec-vt100) 中显示的是曾经广为流行的终端 DEC VT100。^[引自 [Wikipedia](https://en.wikipedia.org/wiki/Computer_terminal#/media/File:DEC_VT100_terminal.jpg)]
 
 ```{r dec-vt100, echo=FALSE, fig.cap='DEC VT100 终端'}
 knitr::include_graphics('images/dec_vt100.jpg')
 ```
 
-为什么会出现终端这种设备？以今天的眼光看似乎显得不可理解。早期的计算机十分昂贵，可不像现在人人都能拥有一台。除了大型商业组织或大学，很难在别处看到计算机的身影。为了共享计算机资源，终端应运而生。伴随着科技的进步，终端虽然最终掉进了历史的黑洞，然而却以新的形式重生，这就是 Terminal emulator（终端模拟器），或称之为虚拟终端。
+为什么会出现终端这种硬件设备呢？以今天的眼光来看，显得似乎有些难以理解。这是因为早期的计算机造价十分昂贵，可不像现在人人都能拥有一台那么简单。除了大型商业组织或大学研究机构，很难在别处看到计算机的身影。为了能够共享计算机资源，于是终端应运而生。不过，伴随着科技的进步，终端虽然最终掉进了历史的黑洞，但是却以新的形式重生了，这就是终端模拟器（Terminal emulator），或称之为虚拟终端。
 
-## Terminal emulator（终端模拟器） {#term}
+## 终端模拟器 {#term}
 
-Terminal emulator 意为终端模拟器，即用来模拟终端硬件设备的应用程序。某些显示体系结构，像是用来控制色彩的转义序列、光标位置等在终端模拟器中得到了支持。图 \@ref(fig:xterm) 显示 Linux 中流行的终端程序之一 xterm。
+终端模拟器，即用来模拟终端硬件设备的应用程序。在实体终端中存在的某些显示体系结构，比如用来控制色彩的转义序列、光标位置等在终端模拟器中也得到了支持。图 \@ref(fig:xterm) 显示 Linux 中流行的终端程序之一 xterm。
 
 ```{r xterm, echo=FALSE, fig.cap='xterm 终端程序'}
 knitr::include_graphics('images/xterm.png')
 ```
 
-不管是 Linux，还是 macOS，乃至 Windows 操作系统平台，都有许多终端模拟器可以选择。
+不管是 Linux 操作系统，还是 macOS 操作系统，乃至 Windows 操作系统，都有许多终端模拟器可以选择。下面罗列的是这三个操作系统中比较流行的终端模拟器。
 
 ### Linux
 
@@ -62,36 +58,36 @@ knitr::include_graphics('images/xterm.png')
 - mintty：Cygwin 环境的终端。
 - PuTTY：支持多种协议的开源终端。
 
-终端模拟器究竟有什么用呢？这就是我们将在下一节要介绍的内容——Shell。
+终端模拟器究竟有什么用途呢？请先别着急，我们马上就会讲到啦。
 
 ## Shell
 
-在 Linux 中，Shell 是一种命令解释程序，它负责用户输入命令的解析和执行。现代 Shell 除了具有与用户直接交互的特性之外，通常也包含编程功能，支持变量、数组、函数、循环、条件等要素。
+Shell 是一种命令解释程序，它负责用户输入命令的读取、解析和执行。现代 Shell 除了具有与用户直接交互的特性之外，通常也包含编程功能，支持变量、数组、函数、循环、条件等编程基本要素。
 
-Shell 之所以被称为 Shell，是由于它相对 Linux 的核心——内核而言，处于最外层，就像乌龟的壳一样。也正因为如此，Shell 提供用来访问系统服务的用户界面，扮演着与内核交互的角色，如图 \@ref(fig:shell) 所示。
+Shell 之所以如此称呼，是由于它相对 Linux 的核心——内核（Kernel）而言，处于整个操作系统的最外层，就像乌龟的壳一样。也正因为如此，Shell 提供用来访问系统服务的用户界面，扮演着与内核交互的角色，如图 \@ref(fig:shell) 所示。
 
 ```{r shell, echo=FALSE, fig.cap='Shell 与内核'}
 knitr::include_graphics('images/shell.jpg')
 ```
 
-在 Unix 及 Linux 的发展过程中，出现了多种 Shell，其中比较知名的包括：sh、csh、ksh、bash、zsh 等。
+在 Unix 及 Linux 的发展过程中，出现了许多种 Shell，其中比较知名的包括：sh、csh、ksh、bash、zsh 等。
 
 ### sh {#sh}
 
-sh，即 Bourne shell，为 Unix 第 7 版的默认 Shell。Bourne shell 由贝尔实验室的 Stephen Bourne 开发，于 1979 年发布。随着《Unix 编程环境》（Brian Kernighan 与 Rob Pike 著）一书的出版，sh 变得大为流行。
+sh，即 Bourne shell，它是 Unix 第 7 版的默认 Shell。Bourne shell 由贝尔实验室的 Stephen Bourne 开发，于 1979 年发布。随着《Unix 编程环境》（Brian Kernighan 与 Rob Pike 著）一书的出版，sh 变得大为流行。
 
-现在 Linux 系统中的 sh 通常是符号链接的某个兼容 Shell。例如，作者所用的 Debian 9 里的 sh 为 dash。
+Bourne shell 早已被后来的 Shell 所取代，现在 Linux 系统中的 sh 通常是符号链接的某个兼容 Shell。例如，作者所用的 Debian 9 里的 sh 为 dash。
 
 ```bash
 root@toydroid:~# ls -l /bin/sh
 lrwxrwxrwx 1 root root 4 Jan 24  2017 /bin/sh -> dash
 ```
 
-在作者的另一个系统 Arch Linux 中，sh 为 bash。
+在作者的另一个系统 Arch Linux 中，sh 则为 bash。
 
 ```bash
 root@codeland:~# ls -l /bin/sh
-lrwxrwxrwx 1 root root 4 Feb  7 15:15 /bin/sh -> bash*
+lrwxrwxrwx 1 root root 4 Feb  7 15:15 /bin/sh -> bash
 ```
 
 ### csh
@@ -102,7 +98,7 @@ csh 有一个改进版本叫 tcsh，目前是 FreeBSD 的默认 Shell。
 
 ### ksh
 
-ksh 指 KornShell，其开发者为 David Korn，在 1983 年公布于世。ksh 遵循 POSIX 标准，能够向下兼容 Bourne shell，整合了来自 C shell 的诸多特性。ksh 的一大亮点是引入了 vi 和 Emacs 风格的命令行编辑模式，使用户完全可以按照自己的按键习惯操作。此外，在 ksh 中还增加了关联数组的特性。
+ksh 指 Korn Shell，其开发者为 David Korn，在 1983 年公布于世。ksh 遵循 POSIX 标准，能够向下兼容 Bourne shell，整合了来自 C shell 的诸多特性。ksh 的一大亮点是引入了 vi 和 Emacs 风格的命令行编辑模式，使用户完全可以按照自己的按键习惯操作。此外，在 ksh 中还增加了关联数组的特性。
 
 由于 ksh 最初以私有软件的形式进行分发，从而被限制了传播。代之以出现的替代品包括 pdksh（public domain ksh，公有域的 ksh）、mksh（后成为 Android 的默认 Shell）等。
 
@@ -124,20 +120,18 @@ knitr::include_graphics('images/zsh_prompt.png')
 
 ## 命令行界面
 
-所谓命令行界面也就是 Command-line interface，经常缩写为 CLI，亦即用户输入命令的地方。一旦用户将命令输入完毕并加以提交后，后续对命令的解析以及执行的任务都由 Shell 来完成。
+命令行界面（Command-line interface），经常缩写为 CLI，亦即用户输入命令的地方。一旦用户将命令输入完毕并加以提交后，后续对命令的解析以及执行的任务都由 Shell 来完成。
 
-```{block2, type='rmdnote'}
 与 CLI 相对的是 GUI，即 Graphical user interface，意为图形用户界面，它采用图形化的方式让用户与计算机进行交互。因其具有容易使用的优点，包括 Linux、macOS、Windows 等在内的现代操作系统无一例外都提供了图形用户界面。
-```
 
-既然图形用户界面要比命令行界面更加易用，那么是否说明可以完全抛弃命令行界面呢？答案是并非如此。事实上，有经验的用户尤其擅长使用命令行界面，其理由至少包括下面这几个方面。
+既然图形用户界面要比命令行界面更加易用，那么是否说明可以完全抛弃命令行界面呢？答案是并非如此。事实上，有经验的用户尤其擅长使用命令行界面，其理由至少包括以下几个方面。
 
 ### 功能强大
 
-让我们来看一个例子：
+让我们先来看一个例子：
 
 ```bash
-% history |
+xiaodong@codeland:~$ history |
 awk '{CMD[$2]++;count++;}END \
 { for (a in CMD)print CMD[a] " " \
 CMD[a]/count*100 "% " a;}' |
@@ -146,6 +140,33 @@ column -c3 -s " " -t |
 sort -nr |
 nl |
 head -n10
+```
+
+在作者的 macOS 系统上执行这条命令后，其输出结果如下：
+
+```bash
+ 1  1348  14.3771%    cd
+ 2  1034  11.0282%    l
+ 3  838   8.93771%    git
+ 4  569   6.06869%    ssh
+ 5  513   5.47142%    cat
+ 6  405   4.31954%    vim
+ 7  372   3.96758%    brew
+ 8  360   3.83959%    scp
+ 9  265   2.82637%    rm
+10  264   2.8157%     grep
+```
+
+这条命令虽然看起来似乎有些“吓人”，因为它由 history、awk、grep、column、sort、nl、head 等 7 个命令组成，并通过管道符（|）串接在一起；然而其结果却颇为有趣。它将作者平时在命令行中执行的所有命令都进行了统计，最终展示出 10 个最常用的命令，并相应列出每个命令的使用次数和所占百分比。
+
+管道符将前一命令的输出作为后一命令的输入，使这些表面上不相干的命令全都协同工作，犹如搭积木一样。这是命令行的真正威力所在。
+
+### 灵活高效
+
+假如我们打算从 `photos` 目录中找出今年三月拍摄的照片，并将其文件名称导出到 `mar_photos.txt` 这个文本文件中，那么在命令行中可以执行以下命令：
+
+```bash
+xiaodong@codeland:~$ cd photos; ls -l | grep 'Mar' | awk '{ print $9 }' > mar_photos.txt
 ```
 
 ## 如何进入命令行
@@ -168,7 +189,7 @@ head -n10
 
 ### 通过终端进入命令行
 
-另外一种进入命令行界面的方法是使用终端。在不同的操作系统中，可以选择的终端程序也有所不同（参考 \@ref(term) 节）。本书作者在 Linux 下常用 rxvt-unicode，macOS 中则使用 iTerm。
+另外一种进入命令行界面的方法是使用终端。在不同的操作系统中，可以选择的终端程序也有所不同（参考 \@ref(term) 节）。本书作者在 Linux 下常用 rxvt-unicode，macOS 中则使用 iTerm2。
 
 一般而言，终端程序会跟系统的登录 Shell（或称默认 Shell）绑定在一起。有些终端程序提供了更改 Shell 的特性，从而使用户可以方便的选择自己喜欢的 Shell。如果不能从终端程序中直接更改 Shell，那么也可以通过 `chsh` 命令来改变登录 Shell。假如我们想把默认 Shell 更改成 zsh，则可以执行以下命令：
 
