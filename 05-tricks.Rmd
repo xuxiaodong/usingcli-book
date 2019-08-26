@@ -1,0 +1,570 @@
+# 必备锦囊
+
+在本章内容中，我们将向大家介绍几个实用的命令行使用妙招，包括如何快速导航文件系统、使用别名来省时省力、通过 `{}` (花括号) 构造命令参数、使用命令替换和变量减少操作步骤、以及重复执行命令等内容。学完本章内容后，我们希望大家在使用命令行时都能够做到常备锦囊，心中不慌。
+
+## 快速导航
+
+在命令行下，你如何穿越文件系统的“丛林”而不致迷路？你又如何快速定位所需的文件和目录？如果你仅仅了解导航的基本用法，那么恐怕是不够的。在本节，我将教你几个必备的技能，使你能够轻车熟路的驾驭命令行导航。
+
+### 回到用户主目录
+
+也许你已经知道 `~` (波浪线) 这个特殊字符代表用户的主目录，若是想要回到自己的主目录，那么我们可以执行：
+
+```bash
+xiaodong@codeland:~$ cd ~
+```
+
+但是且慢，我想在此告诉你的是，不带任何参数的 `cd` 命令同样能够将你带回主目录：
+
+```bash
+xiaodong@codeland:~$ cd
+```
+
+换句话说，这两个命令行所达到的效果是相同的。然而，两相比较起来，后者比前者可以少输两个字符，和乐而不为呢？
+
+说到 `~` (波浪线)，你还应该了解的一个技巧是，我们可以利用它来转到别的用户的主目录。例如：
+
+```bash
+xiaodong@codeland:~$ cd ~mingji
+```
+
+我们在 `~` (波浪线) 后面直接跟上 `mingji` 这个用户名，于是 `cd` 将我们带到了该用户的主目录。值得注意的是，以下命令行与它并不相同：
+
+```bash
+xiaodong@codeland:~$ cd ~/mingji
+```
+
+请注意 `~` (波浪线) 后的 `/` (斜杠)，这行命令的作用是转到当前用户主目录下的子目录 `mingji`。
+
+### 回到上次工作的目录
+
+我经常使用的一个导航场景是，在目录 A 中处理了任务之后，接着转到目录 B 中处理任务，一旦完成，我需要再次回到目录 A 继续工作。此时，我们可以执行下面的命令来回到上次工作的目录：
+
+```bash
+xiaodong@codeland:~$ cd ~/prj/usingcli
+xiaodong@codeland:~/prj/usingcli$ pwd
+/home/xiaodong/prj/usingcli
+xiaodong@codeland:~/prj/usingcli$ cd ~/cli
+xiaodong@codeland:~/cli$ pwd
+/home/xiaodong/cli
+xiaodong@codeland:~/cli$ cd -
+/home/xiaodong/prj/usingcli
+xiaodong@codeland:~/prj/usingcli$ pwd
+/home/xiaodong/prj/usingcli
+```
+
+在此，我第一次工作的目录是 `~/prj/usingcli`，第二次工作的目录是 `~/cli`。通过执行 `cd` 后跟一个 `-` (减号)，我们快速的回到了第一次工作的目录。`cd -` 命令相当于执行 `cd "$OLDPWD"` 及 `pwd` 两条命令。
+
+```bash
+xiaodong@codeland:~$ cd "$OLDPWD" && pwd
+```
+
+我们还可以继续重复执行 `cd -`，这样就会在 `~/prj/usingcli` 和 `~/cli` 两个目录之间反复切换。
+
+### 访问常用目录
+
+对于需要频繁访问的深层次目录，直接导航起来感觉还是比较麻烦。幸运的是，bash 和 zsh 两个都为我们提供了 `$CDPATH` 变量。这是一个与 `$PATH` 类似的变量，它由 `:` (冒号) 分隔的路径列表组成。利用 `$CDPATH`，我们能够将常用的目录保存起来，以便 `cd` 为我们直接转到这些目录。比如：
+
+```bash
+xiaodong@codeland:~$ CDPATH=:~:~/src:~/prj/usingcli
+```
+
+在这里，我们将 `~` (用户主目录)、`~/src`、以及 `~/prj/usingcli` 等目录加到了 `$CDPATH` 中。注意 `=` (等号) 后面 `:` (冒号) 的左边为空，它表示当前目录，你应当予以保留。否则，在相对路径的情况下 ，`cd` 就不能转到当前目录下的子目录了。
+
+现在，假如我们打算转到 `~/prj/usingcli/build` 目录下的话，那么只要执行下列命令即可：
+
+```bash
+xiaodong@codeland:~$ cd build
+xiaodong@codeland:~/prj/usingcli/build$
+```
+
+这个例子同时也告诉我们，加到 `$CDPATH` 路径列表的目录为待导航的目标目录的父目录。
+
+除了 `$CDPATH` 变量，zsh 也支持 `$cdpath` 变量。
+
+### 自动纠正错误
+
+在用 `cd` 导航目录时，我们免不了偶尔会输错目录的名称。bash 有一个名为 `cdspell` 的选项可以帮助我们自动纠正拼写错误，并导航到正确的目录。像是不正确的字母顺序、缺少或者多余的字符等错误，`cdspell` 都能纠正。
+
+我们在享用如此好的功能之前，需要首先开启 bash 的控制选项：
+
+```bash
+xiaodong@codeland:~$ shopt -s cdspell
+```
+
+`shopt` 命令的 `-s` 用于启用 `cdspell` 选项。
+
+现在我们来试一下 `cdspell` 的效果，我们原本是想要导航到 `/etc` 目录，但是我们却错输成了 `/ect`。不过没有关系，bash 已经帮我们自动纠正了错误，并且转到了正确的目录。
+
+```bash
+xiaodong@codeland:~$ cd /ect
+/etc
+xiaodong@codeland:/etc$ cd -
+xiaodong@codeland:~$ cd /et
+/etc
+xiaodong@codeland:/etc$ cd -
+xiaodong@codeland:~$ cd /etcd
+/etc
+xiaodong@codeland:/etc$
+```
+
+在 zsh 中，我们可以给 `cd` 命令两个参数，它们分别是搜索与替换字符串。zsh 将根据搜索字符串来查看当前工作目录，然后使用第二个字符串替换它，并转到替换后的目录。
+
+```bash
+xiaodong@codeland:~/cli/1.15.8/src$ pwd
+/home/xiaodong/cli/1.15.8/src
+xiaodong@codeland:~/cli/1.15.8/src$ cd 1.15.8 1.15.9
+xiaodong@codeland:~/cli/1.15.9/src$ pwd
+/home/xiaodong/cli/1.15.9/src
+```
+
+本例中，我们的当前工作目录为 `/home/xiaodong/cli/1.15.8/src`，`cd` 命令的第一个参数 `1.15.8` 跟当前工作目录相匹配。zsh 用 `1.15.9` 替换了 `1.15.8`，然后转到了新的目录 `/home/xiaodong/cli/1.15.9/src`。
+
+### 自动导航
+
+因为 `cd` 命令是如此常用，我们使用它的频率又那么高，所以 bash 和 zsh 两个都为 `cd` 命令提供了一个捷径，对像我一样的“懒人”来说，`autocd` 选项极其有用。
+
+在 bash 中，我们可以通过下面的命令来启用 `autocd` 选项：
+
+```bash
+xiaodong@codeland:~$ shopt -s autocd
+```
+
+与此对应的 zsh 指令为：
+
+```bash
+xiaodong@codeland:~$ setopt autocd
+```
+
+现在假设我们想导航到 `~/prj` 目录，代替执行：
+
+```bash
+xiaodong@codeland:~$ cd prj
+```
+
+我们可以省略 `cd` 命令，直接执行：
+
+```bash
+xiaodong@codeland:~$ prj
+xiaodong@codeland:~/prj$ pwd
+/home/xiaodong/prj
+```
+
+### 使用目录栈
+
+前面我们讲到的 `cd -` 允许我们在两个目录之间进行切换，如果我们想要在更多个目录之间切换，那么它就无能为力了。不过，为了帮助我们解决这个问题，bash 和 zsh 提供了目录栈功能。
+
+两个最基本的目录栈命令是 `pushd` 和 `popd`。其中，`pushd` 命令将一个目录添加到目录栈中，而 `popd` 命令则从目录栈中移除上次添加的目录。
+
+```bash
+xiaodong@codeland:~$ pwd
+/home/xiaodong
+xiaodong@codeland:~$ pushd ~/cli
+~/cli ~
+xiaodong@codeland:~/cli$ pushd ~/prj
+~/prj ~/cli ~
+xiaodong@codeland:~/prj$ popd
+~/cli ~
+xiaodong@codeland:~/cli$ popd
+~
+xiaodong@codeland:~$
+```
+
+在这个例子中，我们第一次执行 `pushd ~/cli` 后，将 `~/cli` 添加到目录栈的同时，并且转到了该目录。接着，我们继续执行 `pushd ~/prj`，又将 `~/prj` 目录添加到了目录栈。此刻，我们位于 `~/prj` 目录，目录栈中包括 3 个条目：
+
+```bash
+~/prj ~/cli ~
+```
+
+出栈的顺序跟入栈的顺序相反，第一次执行 `popd` 命令后，移除了目录栈中的最左边的条目 `~/prj`，并转到了相邻的 `~/cli` 目录。再次执行 `popd` 命令，则又移除 `~/cli` 条目，然后转到 `~` 目录。
+
+如果你在执行多次入栈与出栈后忘了目录栈中还有哪些条目的话，那么可以执行 `dirs -v` 命令来查看：
+
+```bash
+xiaodong@codeland:~$ dirs -v
+ 0  ~/prj
+ 1  ~/cli
+ 2  ~
+```
+
+`dirs -v` 为我们列出了目录栈中的所有条目，每行一条，而且开头具有编号，以便我们引用。例如：
+
+```bash
+xiaodong@codeland:~/prj$ pushd +1
+~/cli ~ ~/prj
+xiaodong@codeland:~/cli$
+```
+
+执行 `pushd +1` 将使 `~/cli` 成为目录栈的顶端，并变成当前工作目录。我们可以通过再次执行 `dirs -v` 命令来确认这一点：
+
+```bash
+xiaodong@codeland:~/cli$ dirs -v
+ 0  ~/cli
+ 1  ~
+ 2  ~/prj
+xiaodong@codeland:~/cli$ pwd
+/home/xiaodong/cli
+```
+
+`pushd` 命令中的 `+` (加号) 用于从上往下计数。我们也可以使用 `-` (减号) 来从下往上计数。比如：
+
+```bash
+xiaodong@codeland:~/cli$ popd -1
+~/cli ~/prj
+xiaodong@codeland:~/cli$ dirs -v
+ 0  ~/cli
+ 1  ~/prj
+```
+
+执行 `popd -1` 命令后从目录栈中移除了倒数第二个条目 `~`。
+
+## 使用别名
+
+别名是命令行下最常用的省时技巧之一。它通过对频繁使用的命令及选项重新定义一个较短的名称，从而使我们能够减少输入，最终达到提高操作效率的目的。让我们先来看看如何定义别名。
+
+### 定义别名
+
+不管是 bash，还是 zsh，它们都能使用 `alias` 命令来定义别名。例如，假如我们要将 `ls -lah --color=auto` 定义成 `l` 的话，那么可以执行下列命令：
+
+```bash
+xiaodong@codeland:~$ alias l='ls -lah --color=auto'
+```
+
+代替输入长长的 `ls -lsh` 命令，现在我们只需直接执行 `l` 即可。
+
+```bash
+xiaodong@codeland:~$ l
+```
+
+比较常见的别名定义包括下面这些：
+
+```bash
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias ls='ls --color=auto'
+alias l='ls -lah --color=auto'
+alias la='ls -AF --color=auto'
+alias ll='ls -lFh --color=auto'
+```
+
+除了节省时间，利用别名我们也可以避免经常性的输入错误。如果你常常将 `ls` 错输成 `sl`，那么不妨为它定义一个别名：
+
+```bash
+xiaodong@codeland:~$ alias sl='ls'
+```
+
+在 zsh 中，`alias` 命令还能用 `-s` 选项来定义后缀别名。例如，当我们将文件扩展名 `pdf` 定义成 `zathura` 后缀别名后，直接执行 `pdf` 文件名，就会调用 `zathura` 打开该 `pdf` 文件。
+
+```bash
+xiaodong@codeland:~$ alias -s pdf=zathura
+xiaodong@codeland:~$ cheat_sheet_ssh_v4.pdf
+```
+
+在这个例子中，我们通过执行 `cheat_sheet_ssh_v4.pdf` 来代替执行 `zathura cheat_sheet_ssh_v4.pdf` 命令。
+
+### 查看别名
+
+时间久了，也许你将忘记所定义别名的具体内容。为了查看别名 `sd` 的内容，我们将它作为参数传递给 `alias` 命令：
+
+```bash
+xiaodong@codeland:~$ alias sd
+alias sd='shutdown -h now'
+```
+
+从 `alias` 列出的内容，我们知道 `sd` 是 `shutdown -h now` 的别名。
+
+`alias` 命令也可以不带任何参数，直接予以执行则会列出当前 Shell 中的所有别名。
+
+```bash
+xiaodong@codeland:~$ alias
+```
+
+### 取消别名
+
+如果某个别名不再适用，那么我们可以使用 `unalias` 命令来取消它。
+
+```bash
+xiaodong@codeland:~$ unalias sl
+```
+
+执行 `unalias sl` 命令后，将取消我们先前定义的 `sl` 别名。
+
+```bash
+xiaodong@codeland:~$ sl
+```
+
+此时我们再执行 `sl` 就不是列出当前工作目录的内容了。
+
+比永久取消别名更加有用的一个技巧是临时取消别名。
+
+```bash
+xiaodong@codeland:~$ ls
+xiaodong@codeland:~$ \ls
+```
+
+第一次 `ls` 执行的是别名，第二次我们在 `ls` 前面放了一个 `\` (反斜杠)，用来临时取消别名。请比较两个命令先后执行的输出结果。
+
+此外，`unalias` 命令还支持 `-a` 选项，利用这个选项可以移除所有定义的别名。
+
+```bash
+xiaodong@codeland:~$ unalias -a
+```
+
+### 别名的缺憾
+
+使用别名固然好，但它也有一些缺憾。一方面，别名无法参数化，打算实现一个参数化别名的想法注定会失败。这时候，你应当考虑使用的是函数。另一方面，别名可能覆盖真实的命令，从而误导你原本想要执行命令的意图。
+
+通过 `type -a` 我们可以确定别名极其真实的命令：
+
+```bash
+xiaodong@codeland:~$ type -a sl
+sl is aliased to `ls'
+sl is /usr/bin/sl
+sl is /sbin/sl
+sl is /usr/sbin/sl
+```
+
+这里，我们既能看到 `sl` 是 `ls` 的别名，也能看到它有一个真实的命令。
+
+## 利用 `{}` 构造参数
+
+在命令行下，我们经常会遇到针对多个参数条目执行操作的使用场景，其中文件名算得上是最常见的情形。为了应对这种情况，bash 和 zsh 都提供了逗号分隔的花括号列表，例如：
+
+```bash
+xiaodong@codeland:~$ echo {one,two,three}
+```
+
+将参数传递给 `echo` 命令之前，Shell 会首先展开花括号列表，并生成以下 3 个参数条目：
+
+```bash
+one two three
+```
+
+利用 `{}` (花括号)，我们可以实现许多有意思的功能，下面是我常用的几个。大家在学习时不妨举一反三，以便灵活运用。
+
+### 备份文件
+
+我发现很多朋友在备份文件时执行的命令是：
+
+```bash
+xiaodong@codeland:~$ cp file file.bak
+```
+
+这条命令将 `file` 备份为 `file.bak`。通过 `{}` (花括号)，我们可以将该命令改写成：
+
+```bash
+xiaodong@codeland:~$ cp file{,.bak}
+```
+
+`cp` 命令的参数 `file{,.bak}` 展开后将变成 `file file.bak`。这里的 `,` (逗号) 必不可少，否则 Shell 就不会将其展开了。
+
+类似的，我们也可以利用 `tar` 结合 `{}` (花括号) 来创建存档：
+
+```bash
+xiaodong@codeland:~$ tar cf docs{.tar,}
+```
+
+这里，`tar` 命令将 `docs` 目录存档为 `docs.tar`。
+
+### 生成序列
+
+对于按照一定顺序排列的条目，代替 `,` (逗号)，Shell 也支持通过 `..` (两点) 来指定一个区间。比如：
+
+```bash
+xiaodong@codeland:~$ echo {a..z}
+a b c d e f g h i j k l m n o p q r s t u v w x y z
+```
+
+`echo` 将回显从 a 到 z 所有的小写字母。
+
+又如：
+
+```bash
+xiaodong@codeland:~$ echo {0..9}
+0 1 2 3 4 5 6 7 8 9
+```
+
+`echo` 将回显 0 到 9 的数字。
+
+在区间开头数字的前面也可以添加前导的 0，比如：
+
+```bash
+xiaodong@codeland:~$ echo {01..10}
+```
+
+这将罗列出以下数字序列：
+
+```bash
+01 02 03 04 05 06 07 08 09 10
+```
+
+我们甚至还可以在区间的尾端添加一个步进值：
+
+```bash
+xiaodong@codeland:~$ echo {1..9..2}
+```
+
+末尾的 `2` 为步进值，这样就只会罗列奇数：
+
+```bash
+1 3 5 7 9
+```
+
+在 zsh 中，步进值可以为负数，这种情况下将按倒序罗列数字，例如：
+
+```bash
+xiaodong@codeland:~$ echo {1..9..-2}
+9 7 5 3 1
+```
+
+bash 中想要达到同样的效果需要将区间的首尾端对调，比如：
+
+```bash
+xiaodong@codeland:~$ echo {9..1..2}
+9 7 5 3 1
+```
+
+最后，让我们来看一个实际使用序列的例子。通过生成的序列，将其与路径组合，在下载多个文件时尤其有用。
+
+```bash
+xiaodong@codeland:~$ wget https://linuxtoy.org/img/{1..5}.png
+```
+
+上述命令中，`wget` 将从 <https://linuxtoy.org> 依次下载 1.png、2.png、3.png ... 等图片文件。
+
+值得一提的是，除了 `..` (两点) 的区间表示法，zsh 也支持 `-` (减号) 这种区间表示，不过需要启用 `braceccl` 选项。
+
+```bash
+xiaodong@codeland:~$ setopt braceccl
+xiaodong@codeland:~$ echo {A-Za-z}
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+a b c d e f g h i j k l m n o p q r s t u v w x y z
+```
+
+我们在使用 `setopt` 开启 `braceccl` 选项后，执行 `echo {A-Za-z}` 罗列出了所有大写和小写字母。
+
+### 连用与嵌套
+
+Shell 的 `{}` (花括号) 结构非常灵活和强大，特别是在连用和嵌套时更是威力无穷。先来让我们看一个 `{}` (花括号) 连用的例子。
+
+```bash
+xiaodong@codeland:~$ mkdir -p 2019/{01..12}/{baby,photo}
+```
+
+在本例中，我们连用两个 `{}` (花括号)，这样在每个月份的目录下又分别创建了 `baby` 和 `photo` 两个子目录。这条命令实际上执行的是以下命令：
+
+```bash
+xiaodong@codeland:~$ mkdir -p 2019/01/baby 2019/01/photo \
+2019/02/baby 2019/02/photo \
+2019/03/baby 2019/03/photo \
+2019/04/baby 2019/04/photo \
+2019/05/baby 2019/05/photo \
+2019/06/baby 2019/06/photo \
+2019/07/baby 2019/07/photo \
+2019/08/baby 2019/08/photo \
+2019/09/baby 2019/09/photo \
+2019/10/baby 2019/10/photo \
+2019/11/baby 2019/11/photo \
+2019/12/baby 2019/12/photo
+```
+
+我们不妨将两个命令比较一下，如果直接手动输入后者该是多么枯燥和乏味的事情。但是，有了 `{}` (花括号) 的帮助，我们就变轻松了不少。
+
+`{}` (花括号) 结构不仅可以连用，而且能够嵌套。例如：
+
+```bash
+xiaodong@codeland:~$ echo {{A..Z},{a..z},{0..9}}
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+a b c d e f g h i j k l m n o p q r s t u v w x y z
+0 1 2 3 4 5 6 7 8 9
+```
+
+`echo` 命令的外层 `{}` (花括号) 中包含 3 个内层 `{}` (花括号)，这样就将所有的大写字母、小写字母以及从 0 到 9 的数字都罗列出来了。
+
+## 其它妙招
+
+在本节中，我们介绍其它几个必备的命令行使用妙招。
+
+### 命令替换
+
+假设我们想要编辑包含 `error` 的 Python 源代码文件 (`*.py`)，在此之前，我们首先需要确定哪些 Python 文件具有这些字符串。为此，我们可以使用下面的命令将其找出来：
+
+```bash
+xiaodong@codeland:~$ grep -l error *.py
+```
+
+这里的 `-l` 选项让 `grep` 命令将找出的文件名输出到终端，然后我们就可以用文本编辑器 (如 `nvim`) 来编辑这些文件：
+
+```bash
+xiaodong@codeland:~$ nvim godns.py
+```
+
+代替这种需要两步才能完成的操作，我们也可以要求 Shell 在执行 `grep` 命令后直接将文件名传递给文本编辑器 (如 `nvim`)：
+
+```bash
+xiaodong@codeland:~$ nvim `grep -l error *.py`
+```
+
+Shell 对上述命令 ``` `` ``` (反引号) 中的内容执行命令替换，也就是说，把 `grep` 命令的输出作为 `nvim` 命令的参数。我们从而将两步操作得以合并成一步操作来完成。
+
+使用 ``` `` ``` (反引号) 算是老式的命令替换用法，更新式的用法是 `$()`。所以上面的命令也能改写成如下形式：
+
+```bash
+xiaodong@codeland:~$ nvim $(grep -l error *.py)
+```
+
+我们推荐使用 `$()` 这种新用法，因为在嵌套命令替换时具有更好的可读性。例如：
+
+```bash
+xiaodong@codeland:~$ nvim $(grep -l failed $(date +'%Y%m%d').log)
+xiaodong@codeland:~$ nvim `grep -l failed \`date +'%Y%m%d'\`.log`
+```
+
+在嵌套时，`$()` 看起来一目了然，而 ``` `` ``` (反引号) 则需要转义，其可读性较差。
+
+### 使用变量
+
+虽然 Shell 本身具有内置变量，而且我们在执行程序时还会碰到环境变量，但是我们在此要讲的却是另一种变量，即用户变量。
+
+用户变量是由我们自己所设置的变量，其目的在于临时保存需要多次使用的数据。这样，当我们需要使用数据时就可以通过变量名来引用它了。因为通常变量名比我们要引用的数据要短很多，所以也让我们减少了不必要的重复输入。
+
+让我们看一个例子：
+
+```bash
+xiaodong@codeland:~$ LOG=/var/log/pacman.log
+xiaodong@codeland:~$ head $LOG
+xiaodong@codeland:~$ grep -i error $LOG
+```
+
+我们将变量 `LOG` 的值设置为 `/var/log/pacman.log`，接着通过 `$LOG` 的形式分别在 `head` 和 `grep` 命令中引用它。
+
+### 重复执行命令
+
+当我为演讲主题准备材料时，我想用 `figlet` 这个工具来制作一些有趣的 ASCII 艺术字。虽然 `figlet` 提供了很多艺术样式，但是我并没有见过每一种。要想选择最酷的 ASCII 艺术字，所以我必须把每种样式都浏览一遍。于是，我执行了下面的命令：
+
+```bash
+xiaodong@codeland:~$ figlet -f ascii9 Linux
+xiaodong@codeland:~$ figlet -f bigmono9 Linux
+xiaodong@codeland:~$ figlet -f emboss Linux
+...
+```
+
+可是，`figlet` 还有很多样式，这样一个一个的查看实在枯燥乏味。Shell 有没有什么重复执行命令的快捷方法呢？回答是肯定的。利用 Shell 提供的 `for` 循环，我们可以一遍又一遍的重复执行命令。下面让我们来一次性查看 `figlet` 的所有样式。
+
+```bash
+xiaodong@codeland:~$ cd /usr/share/figlet
+xiaodong@codeland:~$ for font in *.tlf
+> do
+>     echo "Font: $font"
+>     figlet -f $(basename $font .tlf) Linux
+> done
+```
+
+`for` 和 `in` 中间的 `font` 为循环的变量，`*.tlf` 表示扩展名为 `tlf` 的所有文件。`do` 与 `done` 之间的内容为循环体，针对当前目录下的每个 `tlf` 文件都会执行这两条命令。
+
+除了上面多行形式的 `for ... in` 循环结构外，我们也可以使用其单行形式，例如：
+
+```bash
+for font in *.tlf; do figlet -f $(basename $font .tlf) Linux; done
+```

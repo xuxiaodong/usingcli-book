@@ -1,23 +1,31 @@
 ---
 title: "像黑客一样使用命令行"
 author: "徐小东"
-date: "`r Sys.Date()`"
-colorlinks: yes
-description: 命令行的高级用法。
+#date: "`r Sys.Date()`"
+description: 命令行高手修炼之道。
 documentclass: ctexbook
 geometry:
   - b5paper
   - tmargin=2.5cm
   - bmargin=2.5cm
-  - lmargin=3.5cm
+  - lmargin=2.5cm
   - rmargin=2.5cm
 link-citations: yes
+colorlinks: yes
 lof: yes
 lot: yes
 site: bookdown::bookdown_site
 biblio-style: apalike
+cover-image: images/cover.png
 ---
 
-# 前言 {-}
+# 致谢 {-}
 
-精通命令行用法通常被认为是 Linux 黑客的秘密武器。对于普通用户而言，这种看似比较复杂、难以掌握的技能，其实只要打消恐惧心理，辅之以一定的练习，学会并不难。本书将从实际的例子出发，教你从无到有，一步一步的学习使用命令行。一旦夯实了基础，在学了高级命令行用法后，你也可以像 Linux 黑客一样感受到使用命令行是何等的高效和令人愉悦。
+感谢 Bash 及 Zsh 开源社区，你们永远是最棒的家伙！
+
+# 更新 {-}
+
+你可以从 <https://selfhostedserver.com/usingcli-book> 获取本书的更新版本。另外，本书也包括视频版本，请通过 <https://selfhostedserver.com/usingcli> 了解详情。
+
++ Version 2019.3.17：初版
++ Version 2019.8.24：修订版，增加“高效查询 Shell 历史：HSTR”小节。

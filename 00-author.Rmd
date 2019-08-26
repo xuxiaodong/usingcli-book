@@ -1,0 +1,3 @@
+# 作者简介 {#author .unnumbered}
+
+徐小东，网名 toy，GNU/Linux 爱好者，DevOps 践行者。喜技术，好分享，通过 <https://linuxtoy.org> 网站数年间原创及翻译文章达 3000 余篇。另著有[《像黑客一样使用命令行》](https://selfhostedserver.com/usingcli-book)、[《拥抱下一代容器化工具：Podman、Buildah 和 Skopeo》](https://selfhostedserver.com/nextcontainer)，译有《Perl 程序员应该知道的事》、《笨办法学 Git》等图书。Twitter：<https://twitter.com/linuxtoy>，Mail：<xuxiaodong@pm.me>。
