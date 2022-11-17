@@ -8,17 +8,17 @@
 
 控制台（Console），又称为系统控制台（System console）、计算机控制台（Computer console）、根控制台（Root console）、以及操作员控制台（Operator's console）。事实上，早先的控制台是一种用来操作计算机的硬件，如图 \@ref(fig:ibm-1620-model-1) 所示。^[https://en.wikipedia.org/wiki/System_console#/media/File:IBM_1620_Model_1.jpg]从这幅图片中，我们可以看到 IBM 1620 计算机的控制台由左边的操作前面板（参考图 \@ref(fig:ibm-1620-model-1-front-panel)）和右边的打字机组成。通过控制台，操作员将文本数据或待执行的指令录入到计算机，并最终通过计算机读取或执行。
 
-```{r ibm-1620-model-1, echo=FALSE, fig.cap='IBM 1620 的控制台'}
+```{r ibm-1620-model-1, fig.cap='IBM 1620 的控制台'}
 knitr::include_graphics('images/ibm_1620_model_1.jpg')
 ```
 
-```{r ibm-1620-model-1-front-panel, echo=FALSE, fig.cap='IBM 1620 控制台的操作前面板'}
+```{r ibm-1620-model-1-front-panel, fig.cap='IBM 1620 控制台的操作前面板'}
 knitr::include_graphics('images/ibm_1620_model_1_front_panel.jpg')
 ```
 
 随着计算机的发展，控制台从硬件概念变成了一个软件概念。于是，控制台有了新的称呼：虚拟控制台。虚拟控制台正好与物理的控制台硬件相对。通过观察 Linux 系统的启动过程，我们不难发现：在经过计算机硬件自检之后，一旦由引导载入程序接管，不一会儿便会进入系统控制台。在这个过程中，通常会显示如图 \@ref(fig:linux-booting) 所示的 Linux 系统引导信息。^[https://en.wikipedia.org/wiki/Linux_console#/media/File:Knoppix-3.8-boot.png]
 
-```{r linux-booting, echo=FALSE, fig.cap='Linux 系统虚拟控制台'}
+```{r linux-booting, fig.cap='Linux 系统虚拟控制台'}
 knitr::include_graphics('images/linux_booting.png')
 ```
 
@@ -26,7 +26,7 @@ knitr::include_graphics('images/linux_booting.png')
 
 跟控制台一样，起初的终端（Terminal）也是一种计算机硬件设备。从外形上看，终端类似于我们今天所看到的显示器和键盘的结合体。通过终端，用户将指令和数据输入到计算机。同时，终端也将计算机执行的结果展示给用户。图 \@ref(fig:dec-vt100) 中显示的是曾经广为流行的终端 DEC VT100。^[https://en.wikipedia.org/wiki/Computer_terminal#/media/File:DEC_VT100_terminal.jpg]
 
-```{r dec-vt100, echo=FALSE, fig.cap='DEC VT100 终端'}
+```{r dec-vt100, fig.cap='DEC VT100 终端'}
 knitr::include_graphics('images/dec_vt100.jpg')
 ```
 
@@ -36,7 +36,7 @@ knitr::include_graphics('images/dec_vt100.jpg')
 
 终端模拟器，即用来模拟终端硬件设备的应用程序。在物理终端中存在的某些显示体系结构，比如用来控制色彩的转义序列、光标位置等在终端模拟器中也得到了支持。图 \@ref(fig:xterm) 显示 Linux 中流行的终端程序之一 XTerm。
 
-```{r xterm, echo=FALSE, fig.cap='XTerm 终端模拟器'}
+```{r xterm, fig.cap='XTerm 终端模拟器'}
 knitr::include_graphics('images/xterm.png')
 ```
 
@@ -65,7 +65,7 @@ Shell 是一种命令解释程序，它负责用户输入命令的读取、解�
 
 Shell 之所以如此称呼，是由于它相对 Unix 及 Linux 的核心——内核（Kernel）而言，处于整个操作系统的最外层，就像乌龟的壳一样。也正因为如此，Shell 提供用来访问系统服务的用户界面，扮演着与内核交互的角色，如图 \@ref(fig:shell) 所示。
 
-```{r shell, echo=FALSE, fig.cap='Shell 与内核'}
+```{r shell, out.width='50%', fig.align='center', fig.cap='Shell 与内核'}
 knitr::include_graphics('images/shell.png')
 ```
 
@@ -113,7 +113,7 @@ zsh 是 Z shell 的简称，最初的版本由 Paul Falstad 所开发，发布�
 
 在交互用户体验上，zsh 尤其出彩。比如，它支持对命令的选项进行补全、可以设置右提示符等，如图 \@ref(fig:zsh-prompt) 所示。
 
-```{r zsh-prompt, echo=FALSE, fig.cap='zsh 的右提示符'}
+```{r zsh-prompt, fig.cap='zsh 的右提示符'}
 knitr::include_graphics('images/zsh_prompt.png')
 ```
 
@@ -228,7 +228,7 @@ xiaodong@codeland:~$ chsh -s /bin/zsh
 
 当我们进入控制台或打开终端模拟器时，通常会看到跟图 \@ref(fig:cli-prompt) 相似的命令行界面。
 
-```{r cli-prompt, echo=FALSE, fig.cap='命令行界面'}
+```{r cli-prompt, fig.cap='命令行界面'}
 knitr::include_graphics('images/cli-hello.png')
 ```
 

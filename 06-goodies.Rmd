@@ -54,7 +54,7 @@ xiaodong@codeland:~/.bash_it$ ./install.sh
 
 当看到“安装成功完成”的消息时，则说明 Bash-it 安装成功。如图 \@ref(fig:bashit-install) 所示。
 
-```{r bashit-install, echo=FALSE, fig.cap='Bash-it 安装过程'}
+```{r bashit-install, fig.cap='Bash-it 安装过程'}
 knitr::include_graphics('images/bash-it-install.png')
 ```
 
@@ -76,7 +76,7 @@ xiaodong@codeland:~$ bash-it show aliases | less
 
 该命令的输出分为 3 列，第一列为别名的名称，第二列显示该别名是否启用（启用的别名在 [] 中有 X），最后一列是有关别名的说明。如图 \@ref(fig:bashit-show-alias) 所示。
 
-```{r bashit-show-alias, echo=FALSE, fig.cap='在 Bash-it 中查看别名'}
+```{r bashit-show-alias, fig.cap='在 Bash-it 中查看别名'}
 knitr::include_graphics('images/bashit-show-alias.png')
 ```
 
@@ -90,7 +90,7 @@ xiaodong@codeland:~$ bash-it show completions | less
 
 我们发现 system、bash-it 等自动补全已经启用了。如图 \@ref(fig:bashit-show-comp) 所示。
 
-```{r bashit-show-comp, echo=FALSE, fig.cap='在 Bash-it 中查看补全'}
+```{r bashit-show-comp, fig.cap='在 Bash-it 中查看补全'}
 knitr::include_graphics('images/bashit-show-comp.png')
 ```
 
@@ -102,7 +102,7 @@ xiaodong@codeland:~$ bash-it show plugins | less
 
 在输出中显示 base、alias-completion 等插件已经启用。如图 \@ref(fig:bashit-show-plug) 所示。
 
-```{r bashit-show-plug, echo=FALSE, fig.cap='在 Bash-it 中查看插件'}
+```{r bashit-show-plug, fig.cap='在 Bash-it 中查看插件'}
 knitr::include_graphics('images/bashit-show-plug.png')
 ```
 
@@ -146,7 +146,7 @@ xiaodong@codeland:~$ bash-it help aliases git | less
 
 大致估算一下，Bash-it 提供的 git 别名差不多有近 80 个，实在是非常多。如图 \@ref(fig:bashit-alias-git) 所示。
 
-```{r bashit-alias-git, echo=FALSE, fig.cap='Bash-it 提供的 git 别名'}
+```{r bashit-alias-git, fig.cap='Bash-it 提供的 git 别名'}
 knitr::include_graphics('images/bashit-alias-git.png')
 ```
 
@@ -237,7 +237,7 @@ export BASH_IT_THEME='bobby'
 
 为了使新设置的提示符主题生效，你需要关闭并重新打开终端，或者注销并重新登录。如图 \@ref(fig:bashit-theme) 所示。
 
-```{r bashit-theme, echo=FALSE, fig.cap='Bash-it 提示符主题'}
+```{r bashit-theme, fig.cap='Bash-it 提示符主题'}
 knitr::include_graphics('images/bashit-theme.png')
 ```
 
@@ -325,7 +325,7 @@ https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 安装过程要花一会儿功夫，我们需耐心等待。Oh My Zsh 在安装时将对原来的 `.zshrc` 配置文件备份，若是出现“....is now installed!”的字样时，就说明 Oh My Zsh 安装成功了。如图 \@ref(fig:ohmyzsh-install) 所示。
 
-```{r ohmyzsh-install, echo=FALSE, fig.cap='Oh My Zsh 安装过程'}
+```{r ohmyzsh-install, fig.cap='Oh My Zsh 安装过程'}
 knitr::include_graphics('images/ohmyzsh-install.png')
 ```
 
@@ -347,7 +347,7 @@ xiaodong@codeland:~/.oh-my-zsh/plugins/systemd$ ls
 
 其下包含 `README.md` 和 `systemd.plugin.zsh` 两个文件。前者为有关该插件的使用说明，而后者为 `systemd` 插件的源代码。如图 \@ref(fig:ohmyzsh-view-plug)。
 
-```{r ohmyzsh-view-plug, echo=FALSE, fig.cap='Oh My Zsh 插件目录'}
+```{r ohmyzsh-view-plug, fig.cap='Oh My Zsh 插件目录'}
 knitr::include_graphics('images/ohmyzsh-view-plug.png')
 ```
 
@@ -387,11 +387,11 @@ xiaodong@codeland:~$ sc-status sshd
 xiaodong@codeland:~$ sc-list-units
 ```
 
-```{r man, echo=FALSE, fig.cap='执行 man zsh 的输出结果'}
+```{r man, fig.cap='执行 man zsh 的输出结果'}
 knitr::include_graphics('images/man.png')
 ```
 
-```{r systemd, echo=FALSE, fig.cap='执行 sc-status sshd 的输出结果'}
+```{r systemd, fig.cap='执行 sc-status sshd 的输出结果'}
 knitr::include_graphics('images/systemd.png')
 ```
 
@@ -419,7 +419,7 @@ ZSH_THEME="robbyrussell"
 xiaodong@codeland:~$ source ~/.zshrc
 ```
 
-```{r ohmyzsh-theme, echo=FALSE, fig.cap='Oh My Zsh 的 simple 主题样式'}
+```{r ohmyzsh-theme, fig.cap='Oh My Zsh 的 simple 主题样式'}
 knitr::include_graphics('images/ohmyzsh-theme.png')
 ```
 
@@ -472,7 +472,7 @@ plugins=(<原有插件> zsh-syntax-highlighting)
 xiaodong@codeland:~$ echo $'hello, world\x21'
 ```
 
-```{r synhigh-b, echo=FALSE, fig.cap='未启用 zsh-syntax-highlighting 时'}
+```{r synhigh-b, fig.cap='未启用 zsh-syntax-highlighting 时'}
 knitr::include_graphics('images/synhigh-b.png')
 ```
 
@@ -483,7 +483,7 @@ xiaodong@codeland:~$ source ~/.zshrc
 xiaodong@codeland:~$ echo $'hello, world\x21'
 ```
 
-```{r synhigh-a, echo=FALSE, fig.cap='启用 zsh-syntax-highlighting 后'}
+```{r synhigh-a, fig.cap='启用 zsh-syntax-highlighting 后'}
 knitr::include_graphics('images/synhigh-a.png')
 ```
 
@@ -500,7 +500,7 @@ Oh My Zsh 还带了其它几个有趣而实用的命令。下面简单对其作�
 + `take`：创建新目录，并转到该目录，而且支持多级目录，如：`take www/oops`
 + `zsh_stats`：列出使用次数最多的 20 个命令，包含使用次数和所占百分比统计，如图 \@ref(fig:zsh-stats) 所示。
 
-```{r zsh-stats, echo=FALSE, fig.cap='执行 zsh_stats 的输出结果'}
+```{r zsh-stats, fig.cap='zsh stats'}
 knitr::include_graphics('images/zsh-stats.png')
 ```
 
@@ -526,7 +526,7 @@ DISABLE_UPDATE_PROMPT=true
 xiaodong@codeland:~$ upgrade_oh_my_zsh
 ```
 
-```{r upgrade-zsh, echo=FALSE, fig.cap='更新 Oh My Zsh'}
+```{r upgrade-zsh, fig.cap='更新 Oh My Zsh'}
 knitr::include_graphics('images/upgrade-zsh.png')
 ```
 
@@ -789,7 +789,7 @@ HSTR 为我们呈现了一个可以交互的文本界面，如图 \@ref(fig:hstr
 3. 当前状态行：显示当前视图的排列方式、关键字的匹配方法、以及是否区分大小写等信息。
 4. 历史命令列表：根据视图的排列方式展示历史命令。
 
-```{r hstr, echo=FALSE, fig.cap='HSTR 的界面'}
+```{r hstr, fig.cap='HSTR 的界面'}
 knitr::include_graphics('images/hstr.png')
 ```
 
@@ -813,7 +813,7 @@ xiaodong@codeland$ vag # vagrant
 xiaodong@codeland:~/cli$ hh nvim
 ```
 
-```{r hstr-arg, echo=FALSE, fig.cap='执行 hh nvim 的结果'}
+```{r hstr-arg, fig.cap='执行 hh nvim 的结果'}
 knitr::include_graphics('images/hstr-arg.png')
 ```
 

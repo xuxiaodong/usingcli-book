@@ -1,7 +1,6 @@
 ---
 title: "像黑客一样使用命令行"
 author: "徐小东"
-#date: "`r Sys.Date()`"
 description: 命令行高手修炼之道。
 documentclass: ctexbook
 geometry:
@@ -18,6 +17,12 @@ site: bookdown::bookdown_site
 biblio-style: apalike
 cover-image: images/cover.png
 ---
+
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE, out.width = '100%'
+)
+```
 
 # 致谢 {-}
 

@@ -208,7 +208,7 @@ Table: (\#tab:emacs-line) Emacs 模式按行移动和删除的操作方法
 
 针对每一种范围，又包含两种编辑操作，分别为移动和删除。如图 \@ref(fig:emacs-mode) 所示。
 
-```{r emacs-mode, echo=FALSE, fig.cap='Emacs 编辑模式图解'}
+```{r emacs-mode, fig.cap='Emacs 编辑模式图解'}
 knitr::include_graphics('images/editor-emacs-view-body.png')
 ```
 
@@ -327,14 +327,14 @@ xiaodong@codeland:~$ echo command-line interface
 
 Table: (\#tab:vi-replace) vi 模式替换文本的命令
 
-| 命令 | 作用                                                             |
-| ---- | ---------------------------------------------------------------- |
-| cm   | **m** 为某个移动命令，如 `cw` 将光标右边的单词删掉后进入插入模式 |
-| C    | 从光标处删除到行尾，并进入插入模式                               |
-| cc   | 删除整行，并进入插入模式                                         |
-| r    | 替换光标下的字符                                                 |
-| R    | 进入替换文本模式，直到按 **Esc** 结束                            |
-| s    | 利用输入的字符来替换光标下的字符，直到按 **Esc** 结束            |
+| 命令 | 作用                               |
+| ---- | ---------------------------------- |
+| cm   | **m** 为某个移动命令，如 `cw`      |
+| C    | 从光标处删除到行尾，并进入插入模式 |
+| cc   | 删除整行，并进入插入模式           |
+| r    | 替换光标下的字符                   |
+| R    | 进入替换文本模式                   |
+| s    | 利用输入的字符来替换光标下的字符   |
 
 要想搞明白这些替换命令如何工作，不妨来试试以下编辑练习：
 
@@ -375,6 +375,6 @@ xiaodong@codeland:~$ echo A program which handles the interface
 + 删除命令 **d** 和更改命令 **c** 能够与移动命令组合使用
 + 移动命令、删除命令、更改命令之前可以加数字用来多次执行
 
-```{r vi-mode-i, echo=FALSE, fig.cap='vi 编辑模式图解'}
+```{r vi-mode-i, fig.cap='vi 编辑模式图解'}
 knitr::include_graphics('images/editor-vi-view-body.png')
 ```

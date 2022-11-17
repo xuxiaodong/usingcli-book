@@ -128,7 +128,7 @@ xiaodong@codeland:~$ history | grep 'xxx'
 
 当我在 bash 中按 **Ctrl + r** 后，Shell 给我提示 reverse-i-search（在 zsh 中这个提示略有不同，为 bck-i-search），然后我可以在冒号后面键入要搜索的字符串，比如 `hi`。此时，Shell 从历史命令中找到了 `history`，按**回车键**可以立即执行该命令。如果想要对命令加以修改，则只需按**→️ (右方向键)**。如图 \@ref(fig:history-search) 所示。
 
-```{r history-search, echo=FALSE, fig.cap='逆向搜索历史命令'}
+```{r history-search, fig.cap='逆向搜索历史命令'}
 knitr::include_graphics('images/history-search.png')
 ```
 
@@ -272,7 +272,7 @@ xiaodong@codeland:~$ history 5
 
 这里显示 `htop` 的编号为 52，如图 \@ref(fig:history-five) 所示。
 
-```{r history-five, echo=FALSE, fig.cap='history 5 执行结果'}
+```{r history-five, fig.cap='history 5 执行结果'}
 knitr::include_graphics('images/history-five.png')
 ```
 
@@ -352,7 +352,7 @@ xiaodong@codeland:~$ cp -r !*
 
 对于引用上一条命令中的参数，我们甚至可以要求 Shell 精确到具体的第几个。因为 Shell 按照空白来解析命令行，所以它给命令本身编号为 0，后续的选项和参数按 1、2、3 等依次编号。如图 \@ref(fig:history-word) 所示。这就好比程序中的数组一样。在下面的例子中，假如我们想要引用 `bar.txt`，除开 `touch`，按顺序它应该是第 2 个参数，因此可以像这样表示：
 
-```{r history-word, echo=FALSE, fig.cap='命令及选项参数编号'}
+```{r history-word, fig.cap='命令及选项参数编号'}
 knitr::include_graphics('images/history-word.png')
 ```
 
@@ -502,7 +502,7 @@ xiaodong@codeland:~$ echo TRUETYPE
 
 如图 \@ref(fig:history-mode-i) 所示。
 
-```{r history-mode-i, echo=FALSE, fig.cap='历史命令展开模式'}
+```{r history-mode-i, fig.cap='历史命令展开模式'}
 knitr::include_graphics('images/history-mode-i.png')
 ```
 

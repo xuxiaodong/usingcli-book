@@ -62,7 +62,7 @@ set colored-completion-prefix on
 
 其中，开启 `show-all-if-ambiguous` 这个选项后，我们只需按一次 **Tab** 即可看到备选补全列表；`visible-stats` 选项通过在列表项目尾部添加指示符号来说明类型，例如：`@` 代表符号链接、`/` 代表目录等；最后的 `colored-completion-prefix` 选项则给补全的前缀字符加上颜色。如图 \@ref(fig:bash-comp-conf) 所示。
 
-```{r bash-comp-conf, echo=FALSE, fig.cap='bash 自动补全配置结果'}
+```{r bash-comp-conf, fig.cap='bash 自动补全配置结果'}
 knitr::include_graphics('images/bash-comp-conf.png')
 ```
 
@@ -167,7 +167,7 @@ xiaodong@codeland:~$ cd hello
 
 顺便提一句，自动补全不光在命令行下使用，即便在有些图形化程序中也能使用。比如，在 GIMP 中，我也可以通过自动补全来打开文件。如图 \@ref(fig:gimp-comp) 所示。
 
-```{r gimp-comp, echo=FALSE, fig.cap='在 GIMP 中自动补全文件名'}
+```{r gimp-comp, fig.cap='在 GIMP 中自动补全文件名'}
 knitr::include_graphics('images/gimp-comp.png')
 ```
 
@@ -219,7 +219,7 @@ Display all 474 possibilities? (y or n)
 
 因为可供自动补全的列表项目太多，一屏已经显示不下了，所以 bash 使用 `more` 这个页面查看程序来呈现。现在按 **Space (空格键)** 可以翻页，如果想退出，那么按 **q** 即可。如图 \@ref(fig:cmd-comp-more) 所示。
 
-```{r cmd-comp-more, echo=FALSE, fig.cap='命令自动补全备选列表'}
+```{r cmd-comp-more, fig.cap='命令自动补全备选列表'}
 knitr::include_graphics('images/cmd-comp-more.png')
 ```
 
@@ -272,7 +272,7 @@ xiaodong@codeland:~$ find -
 
 后便立即按 **Tab**，bash 马上列出了可以自动补全的选项列表。如图 \@ref(fig:subcmd-comp) 所示。
 
-```{r subcmd-comp, echo=FALSE, fig.cap='命令选项自动补全备选列表'}
+```{r subcmd-comp, fig.cap='命令选项自动补全备选列表'}
 knitr::include_graphics('images/subcmd-comp.png')
 ```
 
@@ -315,7 +315,7 @@ xiaodong@codeland:~$ git init
 
 与 bash 比较而言，zsh 对于命令选项的补全提供更好的用户体验。在下面的例子中，你将看到，zsh 不仅列出了可供补全的选项列表，更有对该选项用途的解释。如图 \@ref(fig:zsh-cmd-opt-comp) 所示。此外，正如前面提到的，你还可以选择这些列表项目。
 
-```{r zsh-cmd-opt-comp, echo=FALSE, fig.cap='zsh 中的命令选项自动补全'}
+```{r zsh-cmd-opt-comp, fig.cap='zsh 中的命令选项自动补全'}
 knitr::include_graphics('images/zsh-cmd-opt-comp.png')
 ```
 
@@ -349,7 +349,7 @@ xiaodong@codeland:~$ source ~/.zshrc
 
 下面让我们来看看 `zsh-autosuggestions` 的用法，首先我在没有开启 `zsh-autosuggestions` 插件的情况下输入 `ls -l`、`cd hello_world` 等命令，除了能够使用命令补全之外，这儿没有命令的自动建议。当 `zsh-autosuggestions` 插件开启后，我一旦输入 `ls`，其后便会出现灰色的自动建议 `-la`。这是因为 zsh 知道我先前曾输入过 `ls -la` 这条命令，所以它给出了自动建议。如图 \@ref(fig:zsh-autosug) 所示。
 
-```{r zsh-autosug, echo=FALSE, fig.cap='zsh 中的命令自动建议'}
+```{r zsh-autosug, fig.cap='zsh 中的命令自动建议'}
 knitr::include_graphics('images/zsh-autosug.png')
 ```
 
@@ -367,7 +367,7 @@ xiaodong@codeland:~$ ls ~
 
 之后按 **Tab**，此时 bash 为我呈现了系统中存在的用户名列表。如图 \@ref(fig:user-comp) 所示。
 
-```{r user-comp, echo=FALSE, fig.cap='bash 中的用户名自动补全备选列表'}
+```{r user-comp, fig.cap='bash 中的用户名自动补全备选列表'}
 knitr::include_graphics('images/user-comp.png')
 ```
 
@@ -380,7 +380,7 @@ xiaodong@codeland:~$ ls ~xiaodong/
 
 在 zsh 中，我们可以看到，与 bash 相比，提供的补全用户名列表表现形式略有差异。bash 中包含 `~` 前缀，并在结尾带有 `/` (斜杠)。zsh 中则仅有用户名本身。如图 \@ref(fig:zsh-user-comp) 所示。
 
-```{r zsh-user-comp, echo=FALSE, fig.cap='zsh 中的用户名自动补全备选列表'}
+```{r zsh-user-comp, fig.cap='zsh 中的用户名自动补全备选列表'}
 knitr::include_graphics('images/zsh-user-comp.png')
 ```
 
@@ -415,7 +415,7 @@ lab.github.com         linuxtoy.org           localhost
 
 看到这里，你或许会想，bash 从哪里找到这些可以用来自动补全的主机名呢？一个是 `/etc/hosts` 文件的内容，另一个是 `ssh` 的配置文件，比如 `~/.ssh/config`。如图 \@ref(fig:completion-hostname) 所示。所以，如果你打算让 bash 为你自动补全常用的主机名的话，那么不妨考虑将其添加到这两个文件中。此外，还包括 `~/.ssh/known_hosts` 文件。凡是通过 `ssh` 登录过的主机，便会包含其中。
 
-```{r completion-hostname, echo=FALSE, fig.cap='自动补全的主机名来源'}
+```{r completion-hostname, fig.cap='自动补全的主机名来源'}
 knitr::include_graphics('images/completion-hostname.png')
 ```
 
@@ -429,7 +429,7 @@ xiaodong@codeland:~$ echo $
 
 后按 **Tab** 并根据提示按 **y**，这时 bash 显示了全部可供补全的变量名。如图 \@ref(fig:var-comp) 所示。
 
-```{r var-comp, echo=FALSE, fig.cap='bash 中的变量名自动补全备选列表'}
+```{r var-comp, fig.cap='bash 中的变量名自动补全备选列表'}
 knitr::include_graphics('images/var-comp.png')
 ```
 
@@ -441,7 +441,7 @@ xiaodong@codeland:~$ echo $BASH_VERSION
 
 zsh 对变量的自动补全与 bash 相似，不过，在我的系统上比 bash 提供的补全列表更多一些。如图 \@ref(fig:zsh-var-comp) 所示。
 
-```{r zsh-var-comp, echo=FALSE, fig.cap='zsh 中的变量名自动补全备选列表'}
+```{r zsh-var-comp, fig.cap='zsh 中的变量名自动补全备选列表'}
 knitr::include_graphics('images/zsh-var-comp.png')
 ```
 
@@ -505,7 +505,7 @@ _mycmd() {
 complete -F _mycmd mycmd
 ```
 
-```{r completion-prog-bash, echo=FALSE, fig.cap='bash 可编程补全示例'}
+```{r completion-prog-bash, fig.cap='bash 可编程补全示例'}
 knitr::include_graphics('images/completion-prog-bash.png')
 ```
 
@@ -558,7 +558,7 @@ _mycmd() {
 _mycmd "$@"
 ```
 
-```{r completion-prog-zsh, echo=FALSE, fig.cap='zsh 可编程补全示例'}
+```{r completion-prog-zsh, fig.cap='zsh 可编程补全示例'}
 knitr::include_graphics('images/completion-prog-zsh.png')
 ```
 
